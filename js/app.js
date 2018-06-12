@@ -26,6 +26,16 @@ const about = $('.about');
 
 // function alerts the next player to which piece they will be working with by changing the border, also makes that piece active by making it the 'current piece'
 function selectPiece(evt) {
+
+	//JDK: this function could probably simplified a bit
+	//     - could assign the event target to a var with shorter name and use withi function
+	//	   - the border colors could be replaced with a predefined css class and updated with addClass(), removeClass(), hasClass()
+	//       makes for easier updating of color in the future. Your future self will thank you. 
+	//     - on piece select all borders could be removed in one shot within an each() may travel a little more through 
+	//       the DOM but would look nicer, less code to maintain? ¯\_(ツ)_/¯
+	//     - The border class could be assigned to the clicked on target piece with the addClass() method
+	// 
+
 	// when the user selects a piece, highlight it by changing the border to salmon
 	if(currentPiece === '' && $(evt.currentTarget).css('border') === '1px solid rgb(0, 0, 0)'){
 		$(evt.currentTarget).css('border', '6px solid rgb(235, 148, 134)')
@@ -81,6 +91,7 @@ function checkWinner() {
 	};
 
 	// funciton changes the borders of all the winning pieces to the lovely salmon color ;)
+	// JDK: Salmon is a lovely color! could assign these to a common class with addClass() jQuery method
 	function highlightWin(spot1, spot2, spot3, spot4) {
 		spot1.children().css('border', '6px solid rgb(235, 148, 134)');
 		spot2.children().css('border', '6px solid rgb(235, 148, 134)');
@@ -609,6 +620,7 @@ $('.game-pieces').one('click', ()=>{
 // GAME PIECES:
 // each game piece div needs an event listener
 // on the click the piece will be highlighted (salmon color)
+//JDK: The click events below could be grouped in a jquery each() function to save a little maintence in the future. 
 $('#A').on('click', selectPiece);
 
 $('#B').on('click', selectPiece);
@@ -643,6 +655,7 @@ $('#P').on('click', selectPiece);
 
 // SPOTS ON THE BOARD:
 // each spot on the board needs an event listener
+//JDK: these event listeners could be asigned within a jQuery each function just like the piece events above
 spotOne.on('click', choosePlacement);
 
 spotTwo.on('click', choosePlacement);
